@@ -62,10 +62,49 @@ Territorio territorios[nm_territorio];
     //   - Opção 2: Verifica se a condição de vitória foi alcançada e informa o jogador.
     //   - Opção 0: Encerra o jogo.
     // - Pausa a execução para que o jogador possa ler os resultados antes da próxima rodada.
+for (i = 0; i < nm_territorio; i++) {
+        printf("--- Cadastrando Território %d ---\n", i + 1);
 
+        // Entrada do Nome do Território (string)
+        // Uso de scanf com máscara para garantir que a string não exceda o limite.
+        printf("Nome do Território (máx %d caracteres): ", mx_nome - 1);
+        scanf("%29s", territorios[i].nome);
+
+        // Entrada da Cor do Exército (string)
+        printf("Cor do Exército (máx %d caracteres): ", mx_cor - 1);
+        scanf("%9s", territorios[i].cor);
+
+        // Entrada da Quantidade de Tropas (inteiro)
+        printf("Quantidade de Tropas: ");
+        
+        // Loop simples de validação para garantir a usabilidade e a entrada de um número
+        while (scanf("%d", &territorios[i].tropas) != 1) {
+            printf("Entrada inválida. Digite um número inteiro para as tropas: ");
+            while (getchar() != '\n'); // Limpa o buffer de entrada
+        }
+        
+        // Limpar o buffer após o scanf de inteiro (prevenção para futuras entradas)
+        while (getchar() != '\n'); 
+
+        printf("\n");
+    }
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
+printf("==========================================\n");
+    printf("   DADOS DOS TERRITÓRIOS CADASTRADOS\n");
+    printf("==========================================\n");
+    printf("%-5s | %-29s | %-15s | %-10s\n", "ID", "NOME", "COR DO EXÉRCITO", "TROPAS");
+    printf("----- | ----------------------------- | --------------- | ----------\n");
 
+    for (i = 0; i < nm_territorio; i++) {
+        // Exibição formatada e clara (Usabilidade)
+        printf("%-5d | %-29s | %-15s | %-10d\n", 
+               i + 1, 
+               territorios[i].nome, 
+               territorios[i].cor, 
+               territorios[i].tropas);
+    }
+    printf("-------------------------------------------------------------------\n");
     return 0;
 }
 
